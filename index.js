@@ -6,13 +6,11 @@ const puppeteer = require('puppeteer');
     const page = await browser.newPage();
     await page.goto(urlanime, {waitUntil:'networkidle2'});
     const data = await page.evaluate(()=>{
-        const title = document.querySelector('span[itemprop="name"]').innerText;
+       const title = [...document.querySelectorAll('span[itemprop="name"]')].map(v=> v.innerText);
         return title
     })
-
     console.log(data);
-    
-    debugger
+  
     
     await browser.close();
     } catch (error) {
